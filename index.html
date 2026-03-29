@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrustLens Analyzer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Source+Serif+4:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section class="hero">
+      <p class="eyebrow">Misinformation + AI Content Review</p>
+      <h1>Analyze claims, text, and image descriptions in one place.</h1>
+      <p class="lede">
+        This tool gives a fast heuristic review for AI-generated patterns, misleading language,
+        and possible deepfake clues. It is useful for triage, not a substitute for live source verification.
+      </p>
+    </section>
+
+    <section class="workspace">
+      <div class="panel form-panel">
+        <div class="mode-picker" role="tablist" aria-label="Analysis mode">
+          <button class="mode-button active" data-mode="claim" type="button">Claim</button>
+          <button class="mode-button" data-mode="text" type="button">Text</button>
+          <button class="mode-button" data-mode="image" type="button">Image Description</button>
+        </div>
+
+        <label class="field-label" for="userInput">Input</label>
+        <textarea id="userInput" placeholder="Paste a claim, a piece of writing, or describe the image/video frame you want analyzed."></textarea>
+
+        <div id="imageTools" class="image-tools hidden" aria-live="polite">
+          <label class="upload-label" for="imageInput">Upload Image</label>
+          <input id="imageInput" class="file-input" type="file" accept="image/*">
+          <div class="preview-card">
+            <img id="imagePreview" alt="Uploaded preview">
+            <p id="imageMeta" class="image-meta">No image selected.</p>
+          </div>
+        </div>
+
+        <div class="actions">
+          <button id="analyzeButton" class="primary-button" type="button">Analyze Content</button>
+          <button id="sampleButton" class="ghost-button" type="button">Load Example</button>
+        </div>
+
+        <label class="backend-label" for="backendUrl">Backend URL</label>
+        <input id="backendUrl" class="backend-input" type="text" value="http://localhost:8080" spellcheck="false">
+        <label class="backend-label" for="apiKeyInput">OpenAI API Key (Local Use)</label>
+        <input id="apiKeyInput" class="backend-input" type="password" placeholder="sk-..." spellcheck="false" autocomplete="off">
+        <p id="statusNote" class="status-note">Checking AI connection...</p>
+        <p class="hint">
+          The result uses the OpenAI API when a key is available, and falls back to local heuristics only when AI is unavailable.
+        </p>
+      </div>
+
+      <div class="panel output-panel">
+        <div class="output-header">
+          <h2>Structured Result</h2>
+          <button id="copyButton" class="ghost-button" type="button">Copy JSON</button>
+        </div>
+
+        <pre id="jsonOutput" class="json-output">{
+  "content_type": "",
+  "truth_classification": "",
+  "ai_generated_probability": "",
+  "misinformation_score": "",
+  "suspicious_segments": [],
+  "explanation": "",
+  "corrected_information": "",
+  "deepfake_likelihood": "",
+  "key_reasons": [],
+  "final_verdict": ""
+}</pre>
+      </div>
+    </section>
+
+    <section class="notes">
+      <div class="panel note-card">
+        <h3>How the verdict works</h3>
+        <p>
+          Claims are checked for absolute wording, common misinformation patterns, and known false examples.
+          Image descriptions are checked for lighting, texture, face, and background inconsistencies.
+          Text is screened for repetitive AI-like phrasing and low-specificity structure.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
