@@ -25,6 +25,16 @@ This project is a browser-based app for analyzing claims, text, and images for m
 
 ## How To Run
 
+**1**.Create a new folder ,name it as AI-system.
+
+**2**. open the VS CODE in that folder.
+
+**3**.now in VS CODE paste the index.html code which we had provided.
+
+**4**.same like 3rd step do for the {script.js},{style.js},{server.js},{package.json} and {.env.example}
+
+**5**.
+
 1. Start the backend:
 
 ```powershell
